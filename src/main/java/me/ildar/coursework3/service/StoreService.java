@@ -14,6 +14,7 @@ import java.util.Objects;
 public class StoreService {
 
     private final Map<Sock, Integer> socks = new LinkedHashMap<>();
+
     public void income(SockProduct sockProduct) {
         if (isNotValid(sockProduct)) {
             throw new IllegalArgumentException();
@@ -25,13 +26,14 @@ public class StoreService {
             socks.put(sockProduct.getSock(), sockProduct.getQuantity());
         }
     }
+
     public void release(SockProduct sockProduct) {
         Sock sock = sockProduct.getSock();
         int difference = socks.get(sock) - sockProduct.getQuantity();
         if (!socks.containsKey(sock) || isNotValid(sockProduct)) {
             throw new IllegalArgumentException();
         }
-        if (difference<0) {
+        if (difference < 0) {
             throw new RuntimeException("Количество списываемого товара не может превышать количество товара на складе");
         }
         socks.replace(sock, difference);
@@ -55,11 +57,8 @@ public class StoreService {
         return 0;
     }
 
-
     private boolean isNotValid(SockProduct sockProduct) {
         Sock sock = sockProduct.getSock();
         return sock.getCottonPart() < 0 || sock.getCottonPart() > 100 || sockProduct.getQuantity() <= 0;
     }
-
-
 }

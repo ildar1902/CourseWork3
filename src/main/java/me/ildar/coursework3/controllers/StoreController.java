@@ -44,6 +44,7 @@ public class StoreController {
         storeService.release(sockProduct);
         return ResponseEntity.ok().build();
     }
+
     @Operation(summary = "Возврат общего кол-ва носков на складе",
             description = "Возвращает общее кол-во носков на складе, соответствующих переданным в параметрах критериям запроса")
     @ApiResponses({
@@ -60,6 +61,20 @@ public class StoreController {
                                             @RequestParam(required = false, defaultValue = "100") int cottonMax) {
         int available = storeService.getCount(color, size, cottonMin, cottonMax);
         return ResponseEntity.ok(available);
+    }
+
+    @Operation(summary = "Списание носков", description = "Регистрирует списание испорченных (бракованных) носков.  ")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "запрос выполнен, товар списан со склада"),
+            @ApiResponse(responseCode = "400",
+                    description = "параметры запроса отсутствуют или имеют некорректный формат"),
+            @ApiResponse(responseCode = "500",
+                    description = "произошла ошибка, не зависящая от вызывающей стороны")})
+    @DeleteMapping
+    public ResponseEntity<?> decommission(@RequestBody SockProduct sockProduct) {
+        storeService.release(sockProduct);
+        return ResponseEntity.ok().build();
     }
 
 
