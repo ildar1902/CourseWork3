@@ -5,12 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-
-public class Sock {
-    private Color color;
-    private Size size;
-    private int cottonPart;
+@NoArgsConstructor
+public class SockProduct {
+    private Sock sock;
+    private int quantity;
 }
-

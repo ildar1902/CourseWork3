@@ -3,7 +3,7 @@ package me.ildar.coursework3.model;
 public enum Color {
     WHITE("белый"),
     BLACK("чёрный"),
-    GRAY("сериый"),
+    GRAY("серый"),
     BLUE("синий"),
     GREEN("зелёный"),
     RED("красный"),

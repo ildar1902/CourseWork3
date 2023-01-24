@@ -1,37 +1,29 @@
 package me.ildar.coursework3.model;
 
 public enum Size {
-    XS(null, 35),
-    S(36, 37),
-    M(38, 40),
-    L(41, 43),
-    XL(44, 46),
-    XXL(47, null);
-
-    private final Integer lowerBound;
-    private final Integer upperBound;
-
-    Size(Integer lowerBound, Integer upperBound) {
-        this.lowerBound = lowerBound;
-        this.upperBound = upperBound;
+    XS(35),
+    S_36(36),
+    S_37(37),
+    M_38(38),
+    M_39(39),
+    M_40(40),
+    L_41(41),
+    L_42(42),
+    L_43(43),
+    XL_44(44),
+    XL_45(45),
+    XL_46(46),
+    XXL(47);
+    private final int size;
+    Size(int size) {
+        this.size = size;
     }
-
-    public Integer getLowerBound() {
-        return lowerBound;
-    }
-
-    public Integer getUpperBound() {
-        return upperBound;
+    public int getSize() {
+        return size;
     }
 
     @Override
     public String toString() {
-        if (getLowerBound() == null) {
-            return getUpperBound().toString();
-        }
-        if (getUpperBound() == null) {
-            return getLowerBound().toString();
-        }
-        return getLowerBound() + "-" + getUpperBound();
+        return "" + getSize();
     }
 }
