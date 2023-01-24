@@ -1,11 +1,14 @@
 package me.ildar.coursework3.service;
 
+import me.ildar.coursework3.model.Color;
+import me.ildar.coursework3.model.Size;
 import me.ildar.coursework3.model.Sock;
 import me.ildar.coursework3.model.SockProduct;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class StoreService {
@@ -33,6 +36,26 @@ public class StoreService {
         }
         socks.replace(sock, difference);
     }
+
+    public int decommission(String color, int size, int cottonMin, int cottonMax) {
+        Color c = Color.parse(color);
+        Size s = Size.parse(size);
+        if (Objects.isNull(c) || Objects.isNull(s) || cottonMin >= cottonMax || cottonMin < 0 || cottonMax > 100) {
+            throw new RuntimeException("Некорректные параметры");
+        }
+        for (Map.Entry<Sock, Integer> entry : socks.entrySet()) {
+            Sock sock = entry.getKey();
+            if (sock.getColor() == c
+                    && sock.getSize() == s
+                    && sock.getCottonPart() >= cottonMin
+                    && sock.getCottonPart() <= cottonMax) {
+                return entry.getValue();
+            }
+        }
+        return 0;
+    }
+
+
     private boolean isNotValid(SockProduct sockProduct) {
         Sock sock = sockProduct.getSock();
         return sock.getCottonPart() < 0 || sock.getCottonPart() > 100 || sockProduct.getQuantity() <= 0;

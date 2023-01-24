@@ -38,11 +38,21 @@ public class StoreController {
                     description = "товара нет на складе в нужном количестве или параметры запроса имеют некорректный формат"),
             @ApiResponse(responseCode = "500",
                     description = "произошла ошибка, не зависящая от вызывающей стороны")})
-    @PostMapping
+    @PutMapping
     public ResponseEntity<?> release(@RequestBody SockProduct sockProduct) {
         storeService.release(sockProduct);
         return ResponseEntity.ok().build();
     }
-    
+
+    @GetMapping
+    public ResponseEntity<Integer> decommission(@RequestParam String color,
+                                                @RequestParam int size,
+                                                @RequestParam(required = false, defaultValue = "0") int cottonMin,
+                                                @RequestParam(required = false, defaultValue = "100") int cottonMax) {
+        int available = storeService.decommission(color,size,cottonMin,cottonMax);
+        return ResponseEntity.ok(available);
+    }
+
+
 
 }

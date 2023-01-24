@@ -1,5 +1,7 @@
 package me.ildar.coursework3.model;
 
+import org.springframework.lang.Nullable;
+
 public enum Size {
     XS(35),
     S_36(36),
@@ -20,6 +22,16 @@ public enum Size {
     }
     public int getSize() {
         return size;
+    }
+
+    @Nullable
+    public static Size parse(int size) {
+        for (Size s : values()) {
+            if (Float.compare(s.size, size) == 0) {
+                return s;
+            }
+        }
+        return null;
     }
 
     @Override
