@@ -1,5 +1,6 @@
 package me.ildar.coursework3.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.springframework.lang.Nullable;
 
 public enum Color {
@@ -17,6 +18,7 @@ public enum Color {
         this.color = color;
     }
 
+    @JsonValue
     public String getColor() {
         return color;
     }
@@ -24,7 +26,7 @@ public enum Color {
     @Nullable
     public static Color parse(String color) {
         for (Color c : values()) {
-            if (c.name().equals(color)) {
+            if (c.getColor().equals(color)) {
                 return c;
             }
         }

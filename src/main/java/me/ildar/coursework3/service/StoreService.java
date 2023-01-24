@@ -37,7 +37,7 @@ public class StoreService {
         socks.replace(sock, difference);
     }
 
-    public int decommission(String color, int size, int cottonMin, int cottonMax) {
+    public int getCount(String color, int size, int cottonMin, int cottonMax) {
         Color c = Color.parse(color);
         Size s = Size.parse(size);
         if (Objects.isNull(c) || Objects.isNull(s) || cottonMin >= cottonMax || cottonMin < 0 || cottonMax > 100) {

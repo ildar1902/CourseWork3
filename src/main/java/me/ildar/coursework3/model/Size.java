@@ -1,5 +1,6 @@
 package me.ildar.coursework3.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.springframework.lang.Nullable;
 
 public enum Size {
@@ -17,9 +18,12 @@ public enum Size {
     XL_46(46),
     XXL(47);
     private final int size;
+
     Size(int size) {
         this.size = size;
     }
+
+    @JsonValue
     public int getSize() {
         return size;
     }
